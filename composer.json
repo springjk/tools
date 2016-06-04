@@ -1,0 +1,6 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "bupt1987/html-parser": "^3.0"
+    }
+}
