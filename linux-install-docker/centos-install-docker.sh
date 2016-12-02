@@ -8,10 +8,14 @@ chmod +x /usr/local/bin/docker-compose
 # 设置加速器
 curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://a7ed3564.m.daocloud.io
 
+# 设置开启启动并重启
+systemctl enable docker.service
+sudo systemctl restart docker
+
 # 设置 CHINA 源
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 
 yum makecache
 
 # 安装工具
-yum install -y git
+yum install -y git vim wget curl
