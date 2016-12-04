@@ -1,20 +1,22 @@
-php-apache:
-  build: .
-  links:
-    - "mysql"
+php-nginx:
+  image: "webdevops/php-nginx-dev:ubuntu-16.04"
   ports:
     - "80:80"
-  # volumes:
-  #   - ~/Project/xxx/code:/var/www/html
-
+  links:
+    - "mysql"
+  volumes:
+    - ./:/app
+  environment:
+    WEB_DOCUMENT_ROOT: /app
+    # laravel WEB_DOCUMENT_ROOT is /app/public
 mysql:
-  build: ./mysql
+  image: "mysql:5.7"
   expose:
     - "3306"
+  ports:
+    - "3306:3306"
   environment:
     MYSQL_DATABASE: docker
-    MYSQL_USER: docker
-    MYSQL_PASSWORD: docker
     MYSQL_ROOT_PASSWORD: docker
-  # volumes:
-  #   - ~/docker-volumes/mysql/xxx:/var/lib/mysql
+  volumes:
+    - ./data/mysql:/var/lib/mysql
