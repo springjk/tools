@@ -1,22 +1,28 @@
-php-nginx:
-  image: "webdevops/php-nginx-dev:ubuntu-16.04"
-  ports:
-    - "80:80"
-  links:
-    - "mysql"
-  volumes:
-    - ./:/app
-  environment:
-    WEB_DOCUMENT_ROOT: /app
-    # laravel WEB_DOCUMENT_ROOT is /app/public
-mysql:
-  image: "mysql:5.7"
-  expose:
-    - "3306"
-  ports:
-    - "3306:3306"
-  environment:
-    MYSQL_DATABASE: docker
-    MYSQL_ROOT_PASSWORD: docker
-  volumes:
-    - ./data/mysql:/var/lib/mysql
+version: '2'
+services:
+  php-nginx:
+    image: "webdevops/php-nginx-dev:ubuntu-16.04"
+    ports:
+      - "80:80"
+    links:
+      - "mysql"
+    volumes:
+      - ./:/app
+    environment:
+      WEB_DOCUMENT_ROOT: /app
+      # laravel WEB_DOCUMENT_ROOT is /app/public
+  mysql:
+    image: "mysql:5.7"
+    volumes:
+        - mysql-data:/var/lib/mysql
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+      environment:
+        TZ: 'Asia/Shanghai'
+        MYSQL_ROOT_PASSWORD: secret
+      command: ['mysqld', '--character-set-server=utf8']
+volumes:
+  mysql-data:
+    driver: "local"
