@@ -19,11 +19,11 @@ services:
       - "3306"
     ports:
       - "3306:3306"
-      environment:
-        TZ: 'Asia/Shanghai'
-        MYSQL_DATABASE: app
-        MYSQL_ROOT_PASSWORD: secret
-      command: ['mysqld', '--character-set-server=utf8']
+    environment:
+      TZ: 'Asia/Shanghai'
+      MYSQL_DATABASE: app
+      MYSQL_ROOT_PASSWORD: secret
+    command: ['mysqld', '--character-set-server=utf8']
 volumes:
   mysql-data:
     driver: "local"
