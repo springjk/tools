@@ -6,7 +6,7 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/1.9.0/docker-co
 chmod +x /usr/local/bin/docker-compose
 
 # 设置加速器
-curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://a7ed3564.m.daocloud.io
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://hub-mirror.c.163.com
 
 # 设置开启启动并重启
 systemctl enable docker.service
