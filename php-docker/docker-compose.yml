@@ -27,4 +27,3 @@ services:
     command: ['mysqld', '--character-set-server=utf8']
 volumes:
   mysql-data:
-    driver: "local"
