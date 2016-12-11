@@ -1,23 +1,22 @@
 version: '2'
+
 services:
   php-nginx:
     image: "webdevops/php-nginx-dev:ubuntu-16.04"
     container_name: php-nginx
     ports:
       - "80:80"
-    links:
-      - "mysql"
     volumes:
       - ./:/app
     environment:
       WEB_DOCUMENT_ROOT: /app
       # laravel WEB_DOCUMENT_ROOT is /app/public
+    networks:
+      - backend
   mysql:
     image: "mysql:5.7"
     volumes:
         - mysql-data:/var/lib/mysql
-    expose:
-      - "3306"
     ports:
       - "3306:3306"
     environment:
@@ -25,5 +24,11 @@ services:
       MYSQL_DATABASE: app
       MYSQL_ROOT_PASSWORD: secret
     command: ['mysqld', '--character-set-server=utf8']
+    networks:
+      - backend
+
 volumes:
   mysql-data:
+
+networks:
+  backend:
